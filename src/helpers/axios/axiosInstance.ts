@@ -1,24 +1,20 @@
-import { authKey } from "@/constants/keyStorage";
-import { IGenericErrorResponse, ResponseSuccessType } from "@/types/common";
-
-import { getFromLocalStorage } from "@/utils/local-storage";
 import axios from "axios";
 
-const instance = axios.create();
-instance.defaults.headers.post["Content-Type"] = "application/json";
-instance.defaults.headers["Accept"] = "application/json";
-instance.defaults.timeout = 60000;
+const axiosInstance = axios.create();
 
-// Add a request interceptor
-instance.interceptors.request.use(
+axiosInstance.defaults.headers.post["Content-Type"] = "application/json";
+axiosInstance.defaults.headers["Accept"] = "application/json";
+axiosInstance.defaults.timeout = 60000;
+
+//  add a request interceptor
+
+axiosInstance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    const accessToken = getFromLocalStorage(authKey);
-    if (accessToken) {
-      config.headers.Authorization = accessToken;
-    }
+    // config.withCredentials = "include";
     return config;
   },
+
   function (error) {
     // Do something with request error
     return Promise.reject(error);
@@ -26,28 +22,40 @@ instance.interceptors.request.use(
 );
 
 // Add a response interceptor
-instance.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   //@ts-ignore
   function (response) {
-    const responseObject: ResponseSuccessType = {
-      data: response?.data?.data,
-      meta: response?.data?.meta,
-    };
-    return responseObject;
-  },
-  async function (error) {
-    if (error?.response?.status === 403) {
-    } else {
-      const responseObject: IGenericErrorResponse = {
-        statusCode: error?.response?.data?.statusCode || 500,
-        message: error?.response?.data?.message || "Something went wrong",
-        errorMessages: error?.response?.data?.message,
+    // Do something with response data
+    if (response.data) {
+      return {
+        data: response.data,
       };
-      return responseObject;
-    }
+    } else {
+      // if there is no data in the response, return the response
 
-    // return Promise.reject(error);
+      return {
+        statusCode: response.status,
+        message: "Invalid response format",
+      };
+    }
+  },
+
+  function (error) {
+    console.log(error, "err from axiosInstance");
+    if (error.response && error.response.data) {
+      console.log(error.response.data, "from axiosInstance");
+
+      // Reject the Promise with the error data
+      return Promise.reject(error);
+    } else {
+      // handle other errors
+      // Reject the Promise with the error data
+      return Promise.reject({
+        statusCode: 500,
+        message: "Something went wrong",
+      });
+    }
   }
 );
 
-export { instance };
+export default axiosInstance;
