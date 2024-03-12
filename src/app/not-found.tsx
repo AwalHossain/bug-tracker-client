@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-function NotFound() {
+export default function NotFound() {
   return (
     <div>
       <h2>Not Found</h2>
@@ -9,5 +9,3 @@ function NotFound() {
     </div>
   );
 }
-
-export default NotFound;

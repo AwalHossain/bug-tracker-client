@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "Bug tracker for your projects",
 };
 
-function RootLayout({
+export default  function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -21,4 +21,3 @@ function RootLayout({
   );
 }
 
-export default RootLayout;

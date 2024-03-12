@@ -1,6 +1,6 @@
 "use client";
 
-function Error({
+export default function Error({
   error,
   reset,
 }: {
@@ -14,5 +14,3 @@ function Error({
     </div>
   );
 }
-
-export default Error;

@@ -1,6 +1,6 @@
 "use client";
 
-function GlobalError({
+export default function GlobalError({
   error,
   reset,
 }: {
@@ -16,5 +16,3 @@ function GlobalError({
     </html>
   );
 }
-
-export default GlobalError;
