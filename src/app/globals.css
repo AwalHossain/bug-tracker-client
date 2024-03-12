@@ -33,7 +33,10 @@ body {
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
 }
-
+.custom-toast {
+  background-color: #ff6347; /* Change this to your desired color */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Change this to your desired shadow */
+}
 #nprogress {
   pointer-events: none;
 }
