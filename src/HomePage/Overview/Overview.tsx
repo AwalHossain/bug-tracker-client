@@ -89,7 +89,8 @@ function Overview() {
             className="w-full rounded-lg md:w-2/3 lg:w-2/3"
             src={imageUrl}
             alt=""
-            layout="responsive"
+            // layout="responsive"
+            unoptimized={true}
             width={500} // adjust this value
             height={300} // adjust this value
           />
