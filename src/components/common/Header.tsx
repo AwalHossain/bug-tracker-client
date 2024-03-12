@@ -1,14 +1,7 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-/* eslint-disable no-console */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/no-unknown-property */
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import logo from "assets/images/grabbug-logo.png";
-import useAuth from "hooks/useAuth";
+"use client";
+
+import logo from "../../assets/images/grabbug-logo.png";
+// import useAuth from "hooks/useAuth";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -36,7 +29,7 @@ const menus: IMenu[] = [
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user, logout } = useAuth();
+  // const { user, logout } = useAuth();
   return (
     <>
       <header>
@@ -46,7 +39,7 @@ function Header() {
             <div className="w-36 flex-shrink-0">
               <Link href="/">
                 <>
-                  <Image src={logo} />
+                  <Image src={logo} alt="logo" />
                 </>
               </Link>
             </div>
@@ -65,7 +58,7 @@ function Header() {
             </ul>
 
             {/* login and sign up button */}
-            {user?.user?.email ? (
+            {/* {user?.user?.email ? (
               <button onClick={logout} className="primary-btn">
                 Logout
               </button>
@@ -80,7 +73,7 @@ function Header() {
                   </Link>
                 </div>
               </>
-            )}
+            )} */}
 
             {/* hamburger menu for mobile */}
             <div
