@@ -5,6 +5,7 @@ import { storeUserInfo } from "@/services/auth.service";
 import { IUser } from "@/types/Auth";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import logo from "../../../assets/images/grabbug-logo.png";
@@ -12,6 +13,7 @@ import logo from "../../../assets/images/grabbug-logo.png";
 export default function Login() {
   const { register, handleSubmit } = useForm<IUser>();
   const [userLogin, { isLoading }] = useUserLoginMutation();
+  const router = useRouter();
 
   const handelLogin = async (data: IUser): Promise<void> => {
     try {
@@ -28,6 +30,9 @@ export default function Login() {
         toast.success("Login successful");
       }
       storeUserInfo({ accessToken: res?.data?.accessToken });
+
+      // redirect to the dashboard
+      router.replace("/dashboard/tickets");
     } catch (error: any) {
       console.log("error from the login page", error?.data as any);
 
