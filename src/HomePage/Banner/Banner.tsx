@@ -57,14 +57,9 @@ function Banner() {
                     "https://clickup.com/landing/images/icons/rating-star.svg"
                   )
                   .map((rating, i) => (
-                    <Image
-                      className="w-4"
-                      key={i}
-                      src={rating}
-                      alt=""
-                      width={16}
-                      height={16}
-                    />
+                    <div className="w-4" key={i}>
+                      <Image src={rating} alt="" width={1} height={1} />
+                    </div>
                   ))}
               </div>
               <p className="text-sm text-gray-500">
@@ -72,29 +67,6 @@ function Banner() {
               </p>
             </div>
             {/* companies */}
-            <div className="flex space-x-4">
-              <Image
-                className="w-16"
-                src="https://clickup.com/landing/images/reviews/color/g2crowd.png"
-                alt=""
-                width={64}
-                height={64}
-              />
-              <Image
-                className="w-16"
-                src="https://clickup.com/landing/images/reviews/color/capterra.png"
-                alt=""
-                width={64}
-                height={64}
-              />
-              <Image
-                className="w-16"
-                src="https://clickup.com/landing/images/reviews/color/getapp.svg"
-                alt=""
-                width={64}
-                height={64}
-              />
-            </div>
           </div>
         </div>
 
