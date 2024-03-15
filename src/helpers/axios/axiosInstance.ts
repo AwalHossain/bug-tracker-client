@@ -1,3 +1,5 @@
+import { authKey } from "@/constants/keyStorage";
+import { getFromLocalStorage } from "@/utils/local-storage";
 import axios from "axios";
 
 const axiosInstance = axios.create();
@@ -11,7 +13,12 @@ axiosInstance.defaults.timeout = 60000;
 axiosInstance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    // config.withCredentials = "include";
+    // Do something before request is sent
+    const accessToken = getFromLocalStorage(authKey);
+
+    if (accessToken) {
+      config.headers.Authorization = accessToken;
+    }
     return config;
   },
 
@@ -40,21 +47,51 @@ axiosInstance.interceptors.response.use(
     }
   },
 
-  function (error) {
-    console.log(error, "err from axiosInstance");
-    if (error.response && error.response.data) {
-      console.log(error.response.data, "from axiosInstance");
+  async function (error) {
+    const originalRequest = error.config;
 
-      // Reject the Promise with the error data
+    // Check if the error is due to an expired access token
+    // if (
+    //   error.response?.status === 401 &&
+    //   error.response?.data?.message === "jwt expired" &&
+    //   !originalRequest._retry
+    // ) {
+    //   originalRequest._retry = true;
+
+    //   try {
+    //     const { data } = await getNewAccesstoken();
+    //     console.log("response from axiosins", data);
+
+    //     if (data?.statusCode === 201) {
+    //       const newAccessToken = data.data.accessToken;
+    //       originalRequest.headers.Authorization = newAccessToken;
+    //       setToLocalStorage("accessToken", newAccessToken);
+    //       console.log("originalRequest", originalRequest);
+
+    //       // Retry the request
+    //       return axiosInstance(originalRequest);
+    //     }
+    //   } catch (err) {
+    //     console.error("Failed to refresh access token: ", err);
+
+    //     // If the refresh token is expired, redirect to login
+    //     window.location.href = "/login";
+    //     return Promise.reject(err);
+    //   }
+    // }
+
+    // If the error response has data, reject the Promise with the error data
+    if (error.response && error.response.data) {
+      console.error("Error from server: ", error.response.data);
       return Promise.reject(error);
-    } else {
-      // handle other errors
-      // Reject the Promise with the error data
-      return Promise.reject({
-        statusCode: 500,
-        message: "Something went wrong",
-      });
     }
+
+    // For other errors, reject the Promise with a generic error message
+    console.error("Something went wrong: ", error);
+    return Promise.reject({
+      statusCode: 500,
+      message: "Something went wrong",
+    });
   }
 );
 
