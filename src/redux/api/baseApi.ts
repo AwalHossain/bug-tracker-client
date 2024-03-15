@@ -6,6 +6,6 @@ import { tagTypesList } from "../tag-types";
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery: axiosBaseQuery({ baseUrl: getBaseUrl() }),
-  endpoints: () => ({}),
+  endpoints: (builder) => ({}),
   tagTypes: tagTypesList,
 });
