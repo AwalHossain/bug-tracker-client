@@ -1,27 +1,62 @@
 import { baseApi } from "../baseApi";
+import { storeUserInfo } from "./authSlice";
 
 const AUTH_URL = "/auth";
 
 export const authApi = baseApi.injectEndpoints({
-  endpoints: (build) => ({
-    userLogin: build.mutation({
-      query: (data) => {
-        console.log("Data sent to the server: ", data);
-        return {
-          url: `${AUTH_URL}/login`,
-          method: "POST",
-          data,
-        };
+  endpoints: (builder) => ({
+    userLogin: builder.mutation({
+      query: (data) => ({
+        url: `${AUTH_URL}/login`,
+        method: "POST",
+        data,
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(storeUserInfo(data?.data));
+        } catch (err) {
+          console.log("Error from onQueryStarted", err);
+        }
       },
     }),
-    userRegiser: build.mutation({
+    userRegiser: builder.mutation({
       query: (data) => ({
         url: `${AUTH_URL}/create`,
         method: "POST",
         data,
       }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(storeUserInfo(data?.data));
+        } catch (err) {
+          console.log("Error from onQueryStarted", err);
+        }
+      },
+    }),
+
+    loadUser: builder.query({
+      query: () => ({
+        url: `${AUTH_URL}/me`,
+        method: "GET",
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(storeUserInfo(data?.data));
+        } catch (err) {
+          console.log("Error from onQueryStarted", err);
+        }
+      },
     }),
   }),
+
+  overrideExisting: true,
 });
 
-export const { useUserLoginMutation, useUserRegiserMutation } = authApi;
+export const {
+  useUserLoginMutation,
+  useUserRegiserMutation,
+  useLoadUserQuery,
+} = authApi;
