@@ -1,5 +1,6 @@
 "use client";
 
+import { useAppSelector } from "@/redux/hooks";
 import logo from "../../assets/images/grabbug-logo.png";
 // import useAuth from "hooks/useAuth";
 import Image from "next/image";
@@ -30,6 +31,10 @@ const menus: IMenu[] = [
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   // const { user, logout } = useAuth();
+  const { user } = useAppSelector((state) => state.auth);
+  const logout = () => {
+    // logout();
+  };
   return (
     <>
       <header>
@@ -58,7 +63,7 @@ function Header() {
             </ul>
 
             {/* login and sign up button */}
-            {/* {user?.user?.email ? (
+            {user?.email ? (
               <button onClick={logout} className="primary-btn">
                 Logout
               </button>
@@ -73,7 +78,7 @@ function Header() {
                   </Link>
                 </div>
               </>
-            )} */}
+            )}
 
             {/* hamburger menu for mobile */}
             <div
