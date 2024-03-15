@@ -1,7 +1,8 @@
+"use client";
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
 
-export default function layout(
+export default function PrimaryLayout(
   { children }: { children: React.ReactNode },
   props: any
 ) {
