@@ -1,13 +1,31 @@
 "use client";
 
-import withAuth from "@/components/custom/withAuth";
+import DashboardHeader from "@/components/dashboardPages/DashboardHeader";
 import SideBar from "@/components/sidebar/Sidebar";
+import useAuth from "@/hooks/useAuth";
 import { useState } from "react";
 
-function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [toggle, setToggle] = useState(false);
+
+  const { isAuthenticated, isLoading } = useAuth();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return null; // or redirect to login
+  }
   return (
     <section>
+      <div>
+        {/* Header */}
+        <DashboardHeader />
+      </div>
       <div onClick={() => setToggle(false)} className="relative lg:flex">
         {/* dashboard Menu */}
         <div className="lg:w-[20%] ">
@@ -47,5 +65,3 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
     </section>
   );
 }
-
-export default withAuth(DashboardLayout);
