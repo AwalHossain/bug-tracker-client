@@ -2,6 +2,9 @@ export interface IUser {
   email: string | undefined;
   name?: string | undefined;
   password: string | undefined;
+  workspaceId?: string | undefined;
+  token?: string | undefined;
+  localEmail?: string | undefined;
 }
 
 export interface IAuthContext {
