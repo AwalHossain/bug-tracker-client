@@ -82,7 +82,7 @@ axiosInstance.interceptors.response.use(
 
     // If the error response has data, reject the Promise with the error data
     if (error.response && error.response.data) {
-      console.error("Error from server: ", error.response.data);
+      console.error("Error from server: ", error);
       return Promise.reject(error);
     }
 
