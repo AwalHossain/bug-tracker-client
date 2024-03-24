@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
-import logo from "../../assets/images/grabbug-logo.png";
+import logo from "../../assets/images/bug-logo.png";
 
 function Footer() {
   return (
