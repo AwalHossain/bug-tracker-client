@@ -4,8 +4,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/no-array-index-key */
 import { useAppSelector } from "@/redux/hooks";
-import logo from "assets/images/logo.svg";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BsChatLeftDotsFill } from "react-icons/bs";
@@ -68,12 +66,6 @@ export default function SideBar() {
   return (
     <div className="sidebar-scrollbar h-screen w-full overflow-auto border-r border-r-gray-200 bg-[#ffffff] shadow-xl">
       <div className="flex justify-center">
-        <div
-          onClick={() => router.push("/dashboard")}
-          className="w-[200px] p-3"
-        >
-          <Image className="cursor-pointer" src={logo} alt="logo" />
-        </div>
         {/* <p className="font-semibold uppercase text-[#b3b8d4]">Issue Tracker</p> */}
       </div>
       <div className="border-t border-b pt-4 pb-10">
