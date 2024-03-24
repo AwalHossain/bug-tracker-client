@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppSelector } from "@/redux/hooks";
-import logo from "../../assets/images/grabbug-logo.png";
+import logo from "../../assets/images/logo.png";
 // import useAuth from "hooks/useAuth";
 import Image from "next/image";
 import Link from "next/link";
