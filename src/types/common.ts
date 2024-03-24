@@ -10,12 +10,17 @@ export type ResponseSuccessType = {
 };
 
 export type IGenericErrorResponse = {
-  statusCode: number;
+  statusCode?: number;
   message: string;
-  errorMessages: IGenericErrorMessage[];
+  errorMessages?: IGenericErrorMessage[];
 };
 
 export type IGenericErrorMessage = {
   path: string | number;
   message: string;
+};
+
+export type QueryError = {
+  data: IGenericErrorResponse;
+  status: number;
 };
