@@ -33,11 +33,14 @@
     --ring: 240 10% 3.9%;
 
     --radius: 0.5rem;
+    --spinner-color: #000000;
   }
 
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
+
+    --spinner-color: #ffffff;
 
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
