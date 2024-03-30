@@ -1,18 +1,17 @@
 import ThemeToggle from "@/components/layout/ThemeToggle/theme-toggle";
 import { cn } from "@/lib/utils";
+import { BellIcon, PlusIcon } from "lucide-react";
+import Link from "next/link";
+import { ComboboxDemo } from "./ComboBox";
 import { MobileSidebar } from "./mobile-sidebar";
 import { UserNav } from "./user-nav";
-import Link from "next/link";
 
 export default function Header() {
   return (
-    <div className="fixed top-0 left-0 right-0 supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur z-20">
-      <nav className="h-14 flex items-center justify-between px-4">
+    <div className="fixed top-0 left-0 right-0 supports-backdrop-blur:bg-background/60 border-b bg-background/95 bg-[#323452] backdrop-blur z-20">
+      <nav className="h-10 flex items-center justify-between px-4">
         <div className="hidden lg:block">
-          <Link
-            href={"https://github.com/Kiranism/next-shadcn-dashboard-starter"}
-            target="_blank"
-          >
+          <Link href={"/"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -27,11 +26,18 @@ export default function Header() {
             </svg>
           </Link>
         </div>
+        <div>
+          <ComboboxDemo />
+        </div>
+        <div className="cursor-pointer">
+          <PlusIcon className="h-6 w-6 bg-green-700 text-white" />
+        </div>
         <div className={cn("block lg:!hidden")}>
           <MobileSidebar />
         </div>
 
         <div className="flex items-center gap-2">
+          <BellIcon className="h-4 w-6" />
           <UserNav />
           <ThemeToggle />
         </div>
