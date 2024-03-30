@@ -11,20 +11,33 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOut } from "next-auth/react";
+import { emptyUserInfo } from "@/redux/api/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { removeUserInfo } from "@/services/auth.service";
 export function UserNav() {
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
   const session = {
     user: {
-      name: "John Doe",
-      email: "johs@jm.com",
-      image: "https://images.unsplash.com/photo-1612830724080-6b7f9b1b3b6b",
+      name: user.name,
+      email: user.email,
+      image: user?.pic,
     },
   };
+
+  const handleLogOut = async () => {
+    dispatch(emptyUserInfo());
+    removeUserInfo();
+
+    // Redirect to login page
+    window.location.href = "/login";
+  };
+
   if (session) {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+          <Button variant="outline" className="relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
               <AvatarImage
                 src={session.user?.image ?? ""}
@@ -62,7 +75,7 @@ export function UserNav() {
             <DropdownMenuItem>New Team</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => signOut()}>
+          <DropdownMenuItem onClick={handleLogOut} className="cursor-pointer">
             Log out
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
