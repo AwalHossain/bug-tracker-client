@@ -4,7 +4,9 @@ import { Spinner } from "@/components/common/Spinner";
 import Header from "@/components/layout/header";
 import Sidebar from "@/components/layout/sidebar";
 import useAuth from "@/hooks/useAuth";
+import { useGetOneWorkspaceQuery } from "@/redux/api/workspace/workspaceApi";
 import type { Metadata } from "next";
+import { useParams } from "next/navigation";
 
 const metadata: Metadata = {
   title: "Dashboard",
@@ -18,7 +20,17 @@ export default function DashboardLayout({
 }) {
   const { isAuthenticated, isLoading } = useAuth();
 
-  if (isLoading) return <Spinner className="middle" />;
+  // get workspace id from url
+  const { workspaceId } = useParams();
+
+  const { isLoading: workSpaceLoading } = useGetOneWorkspaceQuery(
+    workspaceId as string,
+    {
+      refetchOnMountOrArgChange: true,
+    },
+  );
+
+  if (isLoading || workSpaceLoading) return <Spinner className="middle" />;
 
   return (
     isAuthenticated && (
