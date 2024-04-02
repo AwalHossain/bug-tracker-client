@@ -1,65 +1,54 @@
-import BreadCrumb from "@/components/breadcrumb";
-import { columns } from "@/components/tables/employee-tables/columns";
-import { EmployeeTable } from "@/components/tables/employee-tables/employee-table";
-import { buttonVariants } from "@/components/ui/button";
-import { Heading } from "@/components/ui/heading";
-import { Separator } from "@/components/ui/separator";
-import { Employee } from "@/constants/data";
-import { cn } from "@/lib/utils";
-import { Plus } from "lucide-react";
-import Link from "next/link";
+"use client";
 
-const breadcrumbItems = [{ title: "Project", link: "/dashboard/project" }];
+import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
+import { ModuleRegistry } from "@ag-grid-community/core";
+import { AgGridReact } from "@ag-grid-community/react";
+import "@ag-grid-community/styles/ag-grid.css";
+import "@ag-grid-community/styles/ag-theme-quartz.css";
+import { useCallback, useMemo, useState } from "react";
+ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
-type paramsProps = {
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-};
-
-export default async function page({ searchParams }: paramsProps) {
-  const page = Number(searchParams.page) || 1;
-  const pageLimit = Number(searchParams.limit) || 10;
-  const country = searchParams.search || null;
-  const offset = (page - 1) * pageLimit;
-
-  const res = await fetch(
-    `https://api.slingacademy.com/v1/sample-data/users?offset=${offset}&limit=${pageLimit}` +
-      (country ? `&search=${country}` : ""),
+export default function Projects() {
+  const containerStyle = useMemo(
+    () => ({ width: "100%", height: "100%", padding: "12px" }),
+    [],
   );
-  const employeeRes = await res.json();
-  const totalUsers = employeeRes.total_users; //1000
-  const pageCount = Math.ceil(totalUsers / pageLimit);
-  const employee: Employee[] = employeeRes.users;
+  const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
+  const [rowData, setRowData] = useState();
+  const [columnDefs, setColumnDefs] = useState([
+    { field: "athlete", rowDrag: true },
+    { field: "country" },
+    { field: "year", width: 100 },
+    { field: "date" },
+    { field: "sport" },
+    { field: "gold" },
+    { field: "silver" },
+    { field: "bronze" },
+  ]);
+  const defaultColDef = useMemo(() => {
+    return {
+      width: 170,
+      filter: true,
+    };
+  }, []);
+
+  const onGridReady = useCallback((params) => {
+    fetch("https://www.ag-grid.com/example-assets/olympic-winners.json")
+      .then((resp) => resp.json())
+      .then((data) => setRowData(data.slice(0, 10)));
+  }, []);
+
   return (
-    <>
-      <div className="flex-1 space-y-4  p-4 md:p-8 pt-6">
-        <BreadCrumb items={breadcrumbItems} />
-
-        <div className="flex items-start justify-between">
-          <Heading
-            title={`Project (${totalUsers})`}
-            description="Manage Projects (Server side table functionalities.)"
-          />
-
-          <Link
-            href={"/dashboard/employee/new"}
-            className={cn(buttonVariants({ variant: "default" }))}
-          >
-            <Plus className="mr-2 h-4 w-4" /> Add New
-          </Link>
-        </div>
-        <Separator />
-
-        <EmployeeTable
-          searchKey="country"
-          pageNo={page}
-          columns={columns}
-          totalUsers={totalUsers}
-          data={employee}
-          pageCount={pageCount}
+    <div style={containerStyle}>
+      <div style={gridStyle} className={"ag-theme-quartz-dark"}>
+        <AgGridReact
+          rowData={rowData}
+          columnDefs={columnDefs}
+          defaultColDef={defaultColDef}
+          rowDragManaged={true}
+          onGridReady={onGridReady}
         />
       </div>
-    </>
+    </div>
   );
 }
