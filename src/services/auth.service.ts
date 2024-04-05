@@ -23,5 +23,6 @@ export const isLoggedIn = () => {
 };
 
 export const removeUserInfo = () => {
+  localStorage.removeItem("invitation");
   return localStorage.removeItem(authKey);
 };
