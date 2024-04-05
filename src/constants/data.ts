@@ -113,43 +113,55 @@ export type Employee = {
 export const navItems: NavItem[] = [
   {
     title: "Dashboard",
-    href: "/dashboard",
+    href: "/dashboard/workspaceId", // Updated
     icon: "dashboard",
     label: "Dashboard",
   },
   {
     title: "Projects",
-    href: "/dashboard/projects",
+    href: "/dashboard/workspaceId/projects", // Updated
     icon: "projects",
     label: "Projects",
   },
   {
     title: "Tickets",
-    href: "/dashboard/tickets",
+    href: "/dashboard/workspaceId/tickets", // Updated
     icon: "tickets",
     label: "Tickets",
   },
   {
+    title: "Issue",
+    href: "/dashboard/workspaceId/issue", // Updated
+    icon: "issue",
+    label: "Issue",
+  },
+  {
+    title: "New Project",
+    href: "/dashboard/workspaceId/new", // Updated
+    icon: "newProject",
+    label: "New Project",
+  },
+  {
     title: "Create Project",
-    href: "/dashboard/create-project",
+    href: "/dashboard/workspaceId/create-project", // Updated
     icon: "createProject",
     label: "Create Project",
   },
   {
     title: "Task",
-    href: "/dashboard/task",
+    href: "/dashboard/workspaceId/task", // Updated
     icon: "kanban",
     label: "kanban",
   },
   {
     title: "Create Issue",
-    href: "/dashboard/create-issue",
+    href: "/dashboard/workspaceId/create-issue", // Updated
     icon: "createIssue",
     label: "createIssue",
   },
   {
     title: "Message",
-    href: "/dashboard/chat",
+    href: "/dashboard/workspaceId/chat", // Updated
     icon: "chat",
     label: "Message",
   },
