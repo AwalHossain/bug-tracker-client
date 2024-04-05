@@ -21,7 +21,7 @@ export function UserNav() {
     user: {
       name: user.name,
       email: user.email,
-      image: user?.pic,
+      image: user?.photoUrl,
     },
   };
 
@@ -37,8 +37,8 @@ export function UserNav() {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="relative h-8 w-8 rounded-full">
-            <Avatar className="h-8 w-8">
+          <Button className="relative h-6 w-6 rounded-full px-0">
+            <Avatar className="h-6 w-6">
               <AvatarImage
                 src={session.user?.image ?? ""}
                 alt={session.user?.name ?? ""}
@@ -47,7 +47,7 @@ export function UserNav() {
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56" align="end" forceMount>
+        <DropdownMenuContent className="w-60 mt-2" align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">
