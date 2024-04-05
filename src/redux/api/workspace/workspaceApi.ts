@@ -14,6 +14,8 @@ export const workspaceApi = baseApi.injectEndpoints({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
+          console.log("data from onQueryStarted", data);
+
           dispatch(storeWorkspaceInfo(data?.data));
         } catch (err) {
           console.log("Error from onQueryStarted", err);
@@ -33,6 +35,14 @@ export const workspaceApi = baseApi.injectEndpoints({
         url: `${URL}/get-one/${id}`,
         method: "GET",
       }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(storeWorkspaceInfo(data?.data));
+        } catch (err) {
+          console.log("Error from onQueryStarted", err);
+        }
+      },
     }),
   }),
   overrideExisting: true,
