@@ -15,6 +15,7 @@ export const authApi = baseApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           dispatch(storeUserInfo(data?.data));
+          // dispatch(storeWorkspaceInfo(data?.data));
         } catch (err) {
           console.log("Error from onQueryStarted", err);
         }
@@ -44,6 +45,8 @@ export const authApi = baseApi.injectEndpoints({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
+          console.log(data, "from load user");
+
           dispatch(storeUserInfo(data?.data));
         } catch (err) {
           console.log("Error from onQueryStarted", err);

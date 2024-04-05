@@ -1,6 +1,6 @@
 "use client";
 
-import Spinner from "@/components/common/Spinner";
+import { Spinner } from "@/components/common/Spinner";
 import { useCheckInvitationQuery } from "@/redux/api/invitation/invitationApi";
 import { useAppSelector } from "@/redux/hooks";
 import { QueryError } from "@/types/common";
@@ -47,12 +47,8 @@ export default function InvitationPage({
       router.replace(`/workspace/${workspaceId}`);
     }
 
-    if (data?.statusCode === 200 && user?.email) {
+    if (data?.statusCode === 200) {
       router.replace(`/workspace/${workspaceId}`);
-    }
-
-    if (data?.statusCode === 200 && !user?.email) {
-      router.replace(`/login?workspaceId=${workspaceId}`);
     }
 
     if (error) {
@@ -67,7 +63,7 @@ export default function InvitationPage({
   }, [data, error, router, user?.email, workspaceId]);
 
   if (isLoading) {
-    return <Spinner />; // Render your spinner component when loading
+    return <Spinner className="middle" />; // Render your spinner component when loading
   }
 
   return null; // Don't render anything when not loading

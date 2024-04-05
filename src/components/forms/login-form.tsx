@@ -16,7 +16,7 @@ import { IUser } from "@/types/Auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Spinner } from "../common/Spinner";
@@ -39,16 +39,17 @@ export default function LoginForm() {
   const router = useRouter();
   const [userLogin, { isLoading }] = useUserLoginMutation();
   const { workspaceId, localEmail, token } = useInvitation();
-  const defaultValues = useMemo(
-    () => ({
-      email: "demo@gmail.com",
-    }),
-    [],
-  );
+  // const defaultValues = useMemo(
+  //   () => ({
+  //     email: localEmail ? localEmail : "",
+  //   }),
+  //   [localEmail],
+  // );
   const form = useForm<UserFormValue>({
     resolver: zodResolver(formSchema),
-    defaultValues,
   });
+
+  const { setValue } = form;
 
   const onSubmit = async (data: IUser) => {
     // signIn("credentials", {
@@ -84,9 +85,9 @@ export default function LoginForm() {
   useEffect(() => {
     if (localEmail) {
       console.log("localEmail", localEmail);
-      defaultValues.email = localEmail;
+      setValue("email", localEmail);
     }
-  }, [localEmail, defaultValues]);
+  }, [localEmail, setValue]);
 
   return (
     <>

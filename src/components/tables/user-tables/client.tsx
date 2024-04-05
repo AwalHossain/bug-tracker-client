@@ -1,10 +1,9 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import IssueModal from "@/components/modal/issue-modal";
 import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { User } from "@/constants/data";
-import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { columns } from "./columns";
 
@@ -22,12 +21,14 @@ export const UserClient: React.FC<ProductsClientProps> = ({ data }) => {
           title={`Users (${data.length})`}
           description="Manage users (Client side table functionalities.)"
         />
-        <Button
+        <IssueModal />
+
+        {/* <Button
           className="text-xs md:text-sm"
           onClick={() => router.push(`/dashboard/user/new`)}
         >
           <Plus className="mr-2 h-4 w-4" /> Add New
-        </Button>
+        </Button> */}
       </div>
       <Separator />
       <DataTable searchKey="name" columns={columns} data={data} />

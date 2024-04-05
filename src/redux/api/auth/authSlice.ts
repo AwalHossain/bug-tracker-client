@@ -7,8 +7,22 @@ const initialState = {
     role: "",
     accessToken: "",
     id: "",
-    pic: "",
+    photoUrl: "",
     status: "",
+    createdWorkspaces: [],
+    workspaceMembers: [
+      {
+        id: "",
+        workspaceId: "",
+        userId: "",
+        role: "",
+        workspace: {
+          id: "",
+          name: "",
+          createdById: "",
+        },
+      },
+    ],
   },
 };
 

@@ -24,3 +24,8 @@ export type QueryError = {
   data: IGenericErrorResponse;
   status: number;
 };
+
+export interface Workspace {
+  id: string;
+  name: string;
+}

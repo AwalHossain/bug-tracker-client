@@ -1,4 +1,5 @@
 import { useCreateWorkspaceMutation } from "@/redux/api/workspace/workspaceApi";
+import { useAppSelector } from "@/redux/hooks";
 import { FormEvent, useState } from "react";
 
 export interface WorkspaceFormProps {
@@ -14,6 +15,7 @@ function CreateWorkSpaceForm({
 }: WorkspaceFormProps) {
   const [workspaceName, setWorkspaceName] = useState("");
   const [createWorkspace] = useCreateWorkspaceMutation();
+  const { user } = useAppSelector((state) => state.auth);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +29,10 @@ function CreateWorkSpaceForm({
 
     console.log("res from the create workspace", res);
 
-    onNextClick(workspaceName);
+    if (res?.data?.id) {
+      onNextClick(workspaceName);
+    }
+
     if (onShowInvite) {
       onShowInvite(true);
     }
@@ -42,7 +47,7 @@ function CreateWorkSpaceForm({
           value={workspaceName}
           onChange={(e) => setWorkspaceName(e.target.value)}
           className="w-full border-b text-2xl border-gray-300 rounded-md py-1 px-4 mb-3 focus:outline-none"
-          placeholder="Awal Hossain's Workspace"
+          placeholder={`${user?.name}'s Workspace`}
         />
         <p className="text-gray-500 mb-12">
           You can also use the name of your company or organization

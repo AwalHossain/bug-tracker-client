@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface WorkspaceState {
   workspace: {
-    workspaceName: string;
+    name: string;
     id: string;
     createdById: string;
   };
@@ -10,7 +10,7 @@ interface WorkspaceState {
 
 const initialState: WorkspaceState = {
   workspace: {
-    workspaceName: "",
+    name: "",
     id: "",
     createdById: "",
   },

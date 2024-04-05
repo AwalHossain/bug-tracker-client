@@ -41,6 +41,8 @@ export type Icon = LucideIcon;
 export const Icons = {
   dashboard: Home,
   projects: SquareGanttIcon,
+  issue: X,
+  newProject: Plus,
   tickets: TicketIcon,
   createProject: ClipboardCheck,
   createIssue: BadgeAlertIcon,

@@ -33,19 +33,22 @@
     --ring: 240 10% 3.9%;
 
     --radius: 0.5rem;
+    --spinner-color: #000000;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 210 8% 18%;
+    --foreground: 210 17% 97%;
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --spinner-color: #ffffff;
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --card: 210 8% 18%;
+    --card-foreground: 210 17% 97%;
 
-    --primary: 0 0% 98%;
+    --popover: 210 8% 18%;
+    --popover-foreground: 210 17% 97%;
+
+    --primary: 210 17% 97%;
     --primary-foreground: 240 5.9% 10%;
 
     --secondary: 240 3.7% 15.9%;

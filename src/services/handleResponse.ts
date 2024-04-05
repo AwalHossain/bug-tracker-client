@@ -14,9 +14,9 @@ export const handleResponse = (res: any, router: AppRouterInstance) => {
     storeUserInfo({ accessToken: isData?.accessToken });
     if (isData?.workspaceMembers.length > 0) {
       const workspaceId = isData?.workspaceMembers[0]?.workspaceId;
-      router.replace(`/workspace/${workspaceId}`);
+      router.replace(`/dashboard/${workspaceId}`);
     } else {
-      router.replace("/dashboard");
+      router.replace("/workspace");
     }
   }
 };
