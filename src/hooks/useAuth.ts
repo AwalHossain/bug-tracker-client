@@ -1,11 +1,13 @@
+"use client";
 import { useLoadUserQuery } from "@/redux/api/auth/authApi";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const useAuth = () => {
   const router = useRouter();
-  const { isLoading, data } = useLoadUserQuery(null);
+  const { isLoading, data, isError } = useLoadUserQuery(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   useEffect(() => {
     if (!isLoading && !data?.data?.email) {
@@ -13,9 +15,12 @@ const useAuth = () => {
     } else if (!isLoading && data?.data?.email) {
       setIsAuthenticated(true);
     }
-  }, [isLoading, data, router]);
 
-  return { isAuthenticated, isLoading };
+    // Set initialLoading to false if the query is not loading or encounters an error
+    setInitialLoading(isLoading || isError);
+  }, [isLoading, data, isError, router]);
+
+  return { isAuthenticated, isLoading: initialLoading };
 };
 
 export default useAuth;
