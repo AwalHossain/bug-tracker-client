@@ -29,7 +29,6 @@ export default function ComboBoxComponent({
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
-  console.log("workspace get", getWorkspace);
   const handleWorkspaceSelect = (workspace: Workspace) => {
     onWorkspaceSelect(workspace);
     setOpen(false);
