@@ -19,8 +19,8 @@ export function UserNav() {
   const { user } = useAppSelector((state) => state.auth);
   const session = {
     user: {
-      name: user.name,
-      email: user.email,
+      name: user?.name,
+      email: user?.email,
       image: user?.photoUrl,
     },
   };
