@@ -1,8 +1,4 @@
 "use client";
-
-import { Check, Users } from "lucide-react";
-import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -16,34 +12,25 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { User } from "@/constants/data";
 import { cn } from "@/lib/utils";
-
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
+import { useGetOneWorkspaceQuery } from "@/redux/api/workspace/workspaceApi";
+import { Check, Users } from "lucide-react";
+import { useParams } from "next/navigation";
+import * as React from "react";
+import AssigneUser from "./AssigneUser";
 
 export default function AssigneBox() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [selectedUser, setSelectedUser] = React.useState<User | null>(null);
+  const { workspaceId } = useParams();
+  const { isLoading, data } = useGetOneWorkspaceQuery(workspaceId as string);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  const users = data?.data?.users as User[];
 
   const assigne = (
     <>
@@ -61,9 +48,7 @@ export default function AssigneBox() {
           aria-expanded={open}
           className="w-auto justify-between"
         >
-          {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : assigne}
+          {selectedUser ? selectedUser.name : assigne}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
@@ -71,22 +56,23 @@ export default function AssigneBox() {
           <CommandInput placeholder="Search framework..." />
           <CommandEmpty>No framework found.</CommandEmpty>
           <CommandGroup>
-            {frameworks.map((framework) => (
+            {users?.map((user) => (
               <CommandItem
-                key={framework.value}
-                value={framework.value}
-                onSelect={(currentValue) => {
-                  setValue(currentValue === value ? "" : currentValue);
+                key={user.id}
+                value={user.name}
+                onSelect={() => {
+                  setSelectedUser(user);
                   setOpen(false);
                 }}
               >
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === framework.value ? "opacity-100" : "opacity-0",
+                    selectedUser?.id === user.id ? "opacity-100" : "opacity-0",
                   )}
                 />
-                {framework.label}
+                <AssigneUser photoURL={user.photoUrl} />
+                {user.name}
               </CommandItem>
             ))}
           </CommandGroup>
