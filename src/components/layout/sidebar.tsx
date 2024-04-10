@@ -1,14 +1,20 @@
 "use client";
 import control from "@/assets/images/control.png";
 import { DashboardNav } from "@/components/dashboard-nav";
-import { navItems } from "@/constants/data";
+import { getNavItems } from "@/constants/data";
 import { cn } from "@/lib/utils";
+import { NavItem } from "@/types";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Sidebar() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [open, setOpen] = useState(true);
+
+  const params = useParams();
+  console.log("workspaceId sidebar", params);
+
   useEffect(() => {
     const handleResize = () => {
       const isMediumScreen = window.innerWidth < 1024;
@@ -31,6 +37,10 @@ export default function Sidebar() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const strng = params.workspaceId as string;
+  const navItems = getNavItems(strng) as NavItem[];
+
   return (
     <nav
       className={cn(
