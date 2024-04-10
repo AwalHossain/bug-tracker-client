@@ -1,3 +1,5 @@
+"use client";
+
 import logo from "@/assets/images/bug-logo.png";
 import ThemeToggle from "@/components/layout/ThemeToggle/theme-toggle";
 import { BellIcon, PlusCircle } from "lucide-react";
