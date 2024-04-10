@@ -1,12 +1,13 @@
 "use client";
 
-import { Spinner } from "@/components/common/Spinner";
+import AutheticatedLayout from "@/components/layout/AutheticatedLayout";
 import Header from "@/components/layout/header";
 import Sidebar from "@/components/layout/sidebar";
-import useAuth from "@/hooks/useAuth";
 import { useGetOneWorkspaceQuery } from "@/redux/api/workspace/workspaceApi";
 import type { Metadata } from "next";
 import { useParams } from "next/navigation";
+import { Suspense } from "react";
+import NotFound from "./404";
 
 const metadata: Metadata = {
   title: "Dashboard",
@@ -18,29 +19,32 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthenticated, isLoading } = useAuth();
-
-  // get workspace id from url
   const { workspaceId } = useParams();
+  console.log("workspaceId layout", workspaceId);
 
-  const { isLoading: workSpaceLoading } = useGetOneWorkspaceQuery(
-    workspaceId as string,
-    {
-      refetchOnMountOrArgChange: true,
-    },
-  );
+  const {
+    isLoading: workSpaceLoading,
+    error,
+    data,
+  } = useGetOneWorkspaceQuery(workspaceId as string);
+  // console.log("isLoading auth", isLoading); // Add this line
+  // const { user } = useAppSelector((state) => state.auth);
+  // const userDefaultWorkspacId = user?.workspaceMembers[0]?.workspaceId;
+  // get workspace id from url
 
-  if (isLoading || workSpaceLoading) return <Spinner className="middle" />;
-
+  // console.log("workspac result form layotu", data, "error", error);
+  if (error) {
+    return NotFound();
+  }
   return (
-    isAuthenticated && (
-      <>
+    <Suspense fallback={<div>loading...</div>}>
+      <AutheticatedLayout>
         <Header />
-        <div className="flex h-screen overflow-hidden">
+        <div className="flex">
           <Sidebar />
-          <main className="w-full pt-16">{children}</main>
+          <div className="flex-1">{children}</div>
         </div>
-      </>
-    )
+      </AutheticatedLayout>
+    </Suspense>
   );
 }
