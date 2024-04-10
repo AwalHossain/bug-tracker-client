@@ -1,3 +1,5 @@
+"use client";
+
 import BreadCrumb from "@/components/breadcrumb";
 import { UserClient } from "@/components/tables/user-tables/client";
 import { users } from "@/constants/data";
