@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogOverlay, DialogTrigger } from "@/components/ui/dialog";
-import CreateIssue from "./create-issue";
+import CreateIssue from "../issue/create-issue";
 
 export default function IssueModal() {
   return (
