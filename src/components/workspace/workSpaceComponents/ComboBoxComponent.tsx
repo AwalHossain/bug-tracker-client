@@ -5,6 +5,7 @@ import * as React from "react";
 import { cn } from "../../../lib/utils";
 
 import { Workspace } from "@/types/common";
+import { useParams } from "next/navigation";
 import { Button } from "../../ui/button";
 import {
   Command,
@@ -29,7 +30,6 @@ export default function ComboBoxComponent({
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
-  console.log("workspace get", getWorkspace);
   const handleWorkspaceSelect = (workspace: Workspace) => {
     onWorkspaceSelect(workspace);
     setOpen(false);
@@ -41,6 +41,27 @@ export default function ComboBoxComponent({
     }
   }, [getWorkspace]);
 
+  const params = useParams();
+
+  const get = workspaces.find((workspace) => {
+    console.log("workspace", workspace.id, "parms", params);
+    return workspace.id === (params.workspaceId as string);
+  });
+  console.log(
+    "workspaces details from compo",
+    get,
+    "workspace",
+    workspaces,
+    "check ig",
+    params,
+  );
+
+  React.useEffect(() => {
+    if (!value && get) {
+      console.log("workspaces details", get);
+      setValue(get.name);
+    }
+  }, [value, get]);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
