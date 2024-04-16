@@ -1,44 +1,42 @@
 "use client";
 import control from "@/assets/images/control.png";
-import { DashboardNav } from "@/components/dashboard-nav";
 import { getNavItems } from "@/constants/data";
 import { cn } from "@/lib/utils";
 import { NavItem } from "@/types";
 import Image from "next/image";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Sidebar() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [open, setOpen] = useState(true);
 
-  const params = useParams();
-  console.log("workspaceId sidebar", params);
+  // const params = useParams();
+  console.log("workspaceId sidebar");
 
-  useEffect(() => {
-    const handleResize = () => {
-      const isMediumScreen = window.innerWidth < 1024;
-      setIsSmallScreen(isMediumScreen);
-      if (isMediumScreen) {
-        setOpen(false);
-      } else {
-        setOpen(true);
-      }
-    };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     const isMediumScreen = window.innerWidth < 1024;
+  //     setIsSmallScreen(isMediumScreen);
+  //     if (isMediumScreen) {
+  //       setOpen(false);
+  //     } else {
+  //       setOpen(true);
+  //     }
+  //   };
 
-    // Initial check on component mount
-    handleResize();
+  //   // Initial check on component mount
+  //   handleResize();
 
-    // Add event listener for resize
-    window.addEventListener("resize", handleResize);
+  //   // Add event listener for resize
+  //   window.addEventListener("resize", handleResize);
 
-    // Clean up event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   // Clean up event listener on component unmount
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
-  const strng = params.workspaceId as string;
+  const strng = "lso";
   const navItems = getNavItems(strng) as NavItem[];
 
   return (
@@ -56,7 +54,7 @@ export default function Sidebar() {
             {/* <h2 className="mb-2 px-4 text-xl font-semibold tracking-tight">
               Overview
             </h2> */}
-            <DashboardNav items={navItems} open={open} />
+            {/* <DashboardNav items={navItems} open={open} /> */}
           </div>
         </div>
       </div>

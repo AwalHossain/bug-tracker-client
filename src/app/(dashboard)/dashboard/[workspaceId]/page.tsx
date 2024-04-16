@@ -1,7 +1,6 @@
 "use client";
 
 import { CalendarDateRangePicker } from "@/components/date-range-picker";
-import { Overview } from "@/components/overview";
 import { RecentSales } from "@/components/recent-sales";
 import { Button } from "@/components/ui/button";
 import {
@@ -140,12 +139,12 @@ export default function page() {
             </div>
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7">
               <Card className="col-span-4">
-                <CardHeader>
+                {/* <CardHeader>
                   <CardTitle>Overview</CardTitle>
                 </CardHeader>
                 <CardContent className="pl-2">
                   <Overview />
-                </CardContent>
+                </CardContent> */}
               </Card>
               <Card className="col-span-4 md:col-span-3">
                 <CardHeader>

@@ -6,8 +6,8 @@ export default function AssigneUser({
   photoURL: string | undefined;
 }) {
   return (
-    <Avatar>
-      <AvatarImage src={photoURL} alt="@shadcn" />
+    <Avatar className="m-0 w-6 h-6">
+      <AvatarImage className="" src={photoURL} alt="@shadcn" />
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
   );

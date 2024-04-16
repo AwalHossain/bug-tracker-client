@@ -5,7 +5,6 @@ import ThemeToggle from "@/components/layout/ThemeToggle/theme-toggle";
 import { BellIcon, PlusCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ComboboxDemo } from "./ComboBox";
 import { UserNav } from "./user-nav";
 
 export default function Header() {
@@ -24,9 +23,7 @@ export default function Header() {
           <MobileSidebar />
         </div> */}
         <div className="flex items-center gap-2">
-          <div>
-            <ComboboxDemo />
-          </div>
+          <div>{/* <ComboboxDemo /> */}</div>
           <Link
             href={"/workspace"}
             className={`flex justify-center items-center space-x-1 p-1 ${oviousClass} `}

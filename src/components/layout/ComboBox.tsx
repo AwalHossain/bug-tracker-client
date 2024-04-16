@@ -25,6 +25,8 @@ export function ComboboxDemo() {
     [router],
   );
 
+  console.log("workspaces get", workspaces);
+
   return (
     <ComboBoxComponent
       workspaces={workspaces}

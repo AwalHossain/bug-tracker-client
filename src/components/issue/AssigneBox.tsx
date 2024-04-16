@@ -48,7 +48,11 @@ export default function AssigneBox() {
           aria-expanded={open}
           className="w-auto justify-between"
         >
-          {selectedUser ? selectedUser.name : assigne}
+          {selectedUser ? (
+            <AssigneUser photoURL={selectedUser.photoUrl} />
+          ) : (
+            assigne
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
@@ -64,10 +68,11 @@ export default function AssigneBox() {
                   setSelectedUser(user);
                   setOpen(false);
                 }}
+                className="justify-start gap-x-2 px-0"
               >
                 <Check
                   className={cn(
-                    "mr-2 h-4 w-4",
+                    "h-4 w-4",
                     selectedUser?.id === user.id ? "opacity-100" : "opacity-0",
                   )}
                 />
