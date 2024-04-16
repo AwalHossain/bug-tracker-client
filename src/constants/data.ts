@@ -1,5 +1,3 @@
-import { NavItem } from "@/types";
-
 export type User = {
   id: number;
   name: string;
@@ -110,59 +108,61 @@ export type Employee = {
   profile_picture?: string | null; // Profile picture can be a string (URL) or null (if no picture)
 };
 
-export const navItems: NavItem[] = [
-  {
-    title: "Dashboard",
-    href: "/dashboard/workspaceId", // Updated
-    icon: "dashboard",
-    label: "Dashboard",
-  },
-  {
-    title: "Projects",
-    href: "/dashboard/workspaceId/projects", // Updated
-    icon: "projects",
-    label: "Projects",
-  },
-  {
-    title: "Tickets",
-    href: "/dashboard/workspaceId/tickets", // Updated
-    icon: "tickets",
-    label: "Tickets",
-  },
-  {
-    title: "Issue",
-    href: "/dashboard/workspaceId/issue", // Updated
-    icon: "issue",
-    label: "Issue",
-  },
-  {
-    title: "New Project",
-    href: "/dashboard/workspaceId/new", // Updated
-    icon: "newProject",
-    label: "New Project",
-  },
-  {
-    title: "Create Project",
-    href: "/dashboard/workspaceId/create-project", // Updated
-    icon: "createProject",
-    label: "Create Project",
-  },
-  {
-    title: "Task",
-    href: "/dashboard/workspaceId/task", // Updated
-    icon: "kanban",
-    label: "kanban",
-  },
-  {
-    title: "Create Issue",
-    href: "/dashboard/workspaceId/create-issue", // Updated
-    icon: "createIssue",
-    label: "createIssue",
-  },
-  {
-    title: "Message",
-    href: "/dashboard/workspaceId/chat", // Updated
-    icon: "chat",
-    label: "Message",
-  },
-];
+export const getNavItems = (workspaceId: string) => {
+  return [
+    {
+      title: "Dashboard",
+      href: `/dashboard/${workspaceId}`, // Updated
+      icon: "dashboard",
+      label: "Dashboard",
+    },
+    {
+      title: "Projects",
+      href: `/dashboard/${workspaceId}/projects`, // Updated
+      icon: "projects",
+      label: "Projects",
+    },
+    {
+      title: "Tickets",
+      href: `/dashboard/${workspaceId}/tickets`, // Updated
+      icon: "tickets",
+      label: "Tickets",
+    },
+    {
+      title: "Issue",
+      href: `/dashboard/${workspaceId}/issue`, // Updated
+      icon: "issue",
+      label: "Issue",
+    },
+    {
+      title: "New Project",
+      href: `/dashboard/${workspaceId}/new`, // Updated
+      icon: "newProject",
+      label: "New Project",
+    },
+    {
+      title: "Create Project",
+      href: `/dashboard/${workspaceId}/create-project`, // Updated
+      icon: "createProject",
+      label: "Create Project",
+    },
+    {
+      title: "Task",
+      href: `/dashboard/${workspaceId}/task`, // Updated
+      icon: "kanban",
+      label: "kanban",
+    },
+    {
+      title: "Create Issue",
+      href: `/dashboard/${workspaceId}/create-issue`, // Updated
+      icon: "createIssue",
+      label: "createIssue",
+    },
+    {
+      title: "Message",
+      href: `/dashboard/${workspaceId}/chat`, // Updated
+      icon: "chat",
+      label: "Message",
+    },
+  ];
+};
