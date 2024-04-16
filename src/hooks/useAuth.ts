@@ -1,3 +1,4 @@
+"use client";
 import { useLoadUserQuery } from "@/redux/api/auth/authApi";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
