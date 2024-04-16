@@ -1,3 +1,4 @@
+"use client";
 import control from "@/assets/images/control.png";
 import { DashboardNav } from "@/components/dashboard-nav";
 import { navItems } from "@/constants/data";
