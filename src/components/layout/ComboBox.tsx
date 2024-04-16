@@ -1,12 +1,24 @@
+"use client";
+
 import { useAppSelector } from "@/redux/hooks";
 import { useCallback, useState } from "react";
 
+import { useGetOneWorkspaceQuery } from "@/redux/api/workspace/workspaceApi";
 import { Workspace } from "@/types/common";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import ComboBoxComponent from "../workspace/workSpaceComponents/ComboBoxComponent";
 
 export function ComboboxDemo() {
-  const [workspaceId, setWorkspaceId] = useState("");
+  // get workspace id from url
+  const { workspaceId } = useParams();
+
+  const { isLoading: workSpaceLoading } = useGetOneWorkspaceQuery(
+    workspaceId as string,
+    {
+      refetchOnMountOrArgChange: true,
+    },
+  );
+  const [newId, setWorkspaceId] = useState("");
   const { user } = useAppSelector((state) => state.auth);
   const router = useRouter();
   const { workspace: getWorkspace } = useAppSelector(
