@@ -20,7 +20,11 @@ import { useParams } from "next/navigation";
 import * as React from "react";
 import AssigneUser from "./AssigneUser";
 
-export default function AssigneBox() {
+interface AssigneUserProps {
+  setAssignee: (id: string) => void;
+}
+
+export default function AssigneBox({ setAssignee }: AssigneUserProps) {
   const [open, setOpen] = React.useState(false);
   const [selectedUser, setSelectedUser] = React.useState<User | null>(null);
   const { workspaceId } = useParams();
@@ -49,7 +53,10 @@ export default function AssigneBox() {
           className="w-auto justify-between"
         >
           {selectedUser ? (
-            <AssigneUser photoURL={selectedUser.photoUrl} />
+            <AssigneUser
+              photoURL={selectedUser.photoUrl}
+              name={selectedUser.name}
+            />
           ) : (
             assigne
           )}
@@ -67,6 +74,7 @@ export default function AssigneBox() {
                 onSelect={() => {
                   setSelectedUser(user);
                   setOpen(false);
+                  setAssignee(user?.id!);
                 }}
                 className="justify-start gap-x-2 px-0"
               >
@@ -76,7 +84,7 @@ export default function AssigneBox() {
                     selectedUser?.id === user.id ? "opacity-100" : "opacity-0",
                   )}
                 />
-                <AssigneUser photoURL={user.photoUrl} />
+                <AssigneUser photoURL={user.photoUrl} name={user.name} />
                 {user.name}
               </CommandItem>
             ))}
