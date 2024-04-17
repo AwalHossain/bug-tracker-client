@@ -1,14 +1,16 @@
 export type User = {
-  id: number;
+  id?: string;
+
   name: string;
   company: string;
   role: string;
   verified: boolean;
   status: string;
+  photoUrl?: string;
 };
 export const users: User[] = [
   {
-    id: 1,
+    id: "1",
     name: "Candice Schiner",
     company: "Dell",
     role: "Frontend Developer",
@@ -16,7 +18,7 @@ export const users: User[] = [
     status: "Active",
   },
   {
-    id: 2,
+    id: "2",
     name: "John Doe",
     company: "TechCorp",
     role: "Backend Developer",
@@ -24,7 +26,7 @@ export const users: User[] = [
     status: "Active",
   },
   {
-    id: 3,
+    id: "3",
     name: "Alice Johnson",
     company: "WebTech",
     role: "UI Designer",
@@ -32,7 +34,7 @@ export const users: User[] = [
     status: "Active",
   },
   {
-    id: 4,
+    id: "4",
     name: "David Smith",
     company: "Innovate Inc.",
     role: "Fullstack Developer",
@@ -40,7 +42,7 @@ export const users: User[] = [
     status: "Inactive",
   },
   {
-    id: 5,
+    id: "5",
     name: "Emma Wilson",
     company: "TechGuru",
     role: "Product Manager",
@@ -48,7 +50,7 @@ export const users: User[] = [
     status: "Active",
   },
   {
-    id: 6,
+    id: "6",
     name: "James Brown",
     company: "CodeGenius",
     role: "QA Engineer",
@@ -56,7 +58,7 @@ export const users: User[] = [
     status: "Active",
   },
   {
-    id: 7,
+    id: "7",
     name: "Laura White",
     company: "SoftWorks",
     role: "UX Designer",
@@ -64,7 +66,7 @@ export const users: User[] = [
     status: "Active",
   },
   {
-    id: 8,
+    id: "8",
     name: "Michael Lee",
     company: "DevCraft",
     role: "DevOps Engineer",
@@ -72,7 +74,7 @@ export const users: User[] = [
     status: "Active",
   },
   {
-    id: 9,
+    id: "9",
     name: "Olivia Green",
     company: "WebSolutions",
     role: "Frontend Developer",
@@ -80,7 +82,7 @@ export const users: User[] = [
     status: "Active",
   },
   {
-    id: 10,
+    id: "10",
     name: "Robert Taylor",
     company: "DataTech",
     role: "Data Analyst",
