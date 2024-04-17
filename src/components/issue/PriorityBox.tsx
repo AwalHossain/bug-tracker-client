@@ -16,7 +16,11 @@ const frameworks = [
   { value: "low", label: "LOW", color: "#87909E" },
 ];
 
-export default function PriorityBox() {
+interface PriorityBoxProps {
+  setPriority: (priority: string) => void;
+}
+
+export default function PriorityBox({ setPriority }: PriorityBoxProps) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState();
 
@@ -64,6 +68,7 @@ export default function PriorityBox() {
                 onSelect={(currentValue: any) => {
                   setValue(currentValue === value ? "" : currentValue);
                   setOpen(false);
+                  setPriority(currentValue);
                 }}
               >
                 <div
