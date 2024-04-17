@@ -30,7 +30,11 @@ const FormSchema = z.object({
   }),
 });
 
-export default function CalendarBox() {
+interface CalendarBoxProps {
+  setDate: (date: Date) => void;
+}
+
+export default function CalendarBox({ setDate }: CalendarBoxProps) {
   const [calendarOpen, setCalendarOpen] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -66,11 +70,11 @@ export default function CalendarBox() {
                       )}
                     >
                       {field.value ? (
-                        format(field.value, "PPP")
+                        format(field.value, "MMM dd")
                       ) : (
                         <>
-                          <span>Pick a date</span>
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          <span>Pick a date</span>
                         </>
                       )}
                     </Button>
@@ -83,6 +87,9 @@ export default function CalendarBox() {
                     onSelect={(date) => {
                       field.onChange(date);
                       setCalendarOpen(false);
+                      if (date) {
+                        setDate(date);
+                      }
                     }}
                     disabled={(date) => date < new Date()}
                     initialFocus
